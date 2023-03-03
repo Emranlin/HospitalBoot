@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .div {
+            display: flex;
+            gap: 15px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
+        <form th:action="@{update}" th:object="${appointment}" th:method="post">
+            <input type="hidden" th:field="*{id}">
+        <div>
+            <label for="Date of record">LocalDate</label>
+            <input type="date" th:field="*{date}" id="Date of record"
+                   class="form-control form-control-lg">
+        </div>
+
+
+        <br>
+        <div class="form-group">
+            <select th:field="*{departmentId}">
+                <option value="">>>>select an department<<<</option>
+                <option th:each="depatment : ${departments}" th:value="${depatment.id}" th:text="${depatment.name}"
+                        class="form-control form-control-lg"></option>
+            </select>
+        </div>
+
+        <br>
+        <div class="form-group">
+            <select th:field="*{doctorId}">
+                <option value="">>>>select an doctor<<<</option>
+                <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.firstName+doctor.lastName}"
+                        class="form-control form-control-lg"></option>
+            </select>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <select th:field="*{patientId}">
+                <option value="">>>>select an patient<<<</option>
+                <option th:each="patient : ${patients}" th:value="${patient.id}" th:text="${patient.firsName+patient.lastName}"
+                        class="form-control form-control-lg"></option>
+            </select>
+        </div>
+        <div>
+            <br>
+            <input type="submit" value="save" class="btn btn-outline-danger">
+        </div>
+            <div>
+                <form>
+        <a th:href="@{/appointments/{hospitalId}/save(hospitalId=${hospitalId})}" class="btn btn-outline-danger">Cancel</a>
+            </form>
+    </div>
+</div>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</html>
+
+
